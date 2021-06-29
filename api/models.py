@@ -4,6 +4,14 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+CATEGORY_CHOICES = (
+    ('VEHICLES','vehicles'),
+    ('PHONES', 'phones'),
+    ('PROPERTY', 'property'),
+    ('ELECTRONICS', 'electronics'),
+    ('FASHION', 'fashion'),
+)
+
 class Product(models.Model):
     name = models.CharField(max_length=250)
     description = models.TextField(max_length=500)
@@ -12,6 +20,7 @@ class Product(models.Model):
     imageUrl = models.URLField()
     isSold = models.BooleanField(default=False)
     seller = models.ForeignKey(User, on_delete=models.CASCADE, related_name='models')
+    category = models.CharField(max_length=100, choices=CATEGORY_CHOICES, default='phones')
     createdAt = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
